@@ -1,0 +1,95 @@
+# =====================================
+# ENTORNOS VIRTUALES
+# =====================================
+venv_kitUtiles/
+.venv/
+env/
+ENV/
+venv/
+
+# =====================================
+# PYTHON CACHE / COMPILADOS
+# =====================================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.pkl
+*.db
+*.sqlite3
+
+# =====================================
+# CONFIGURACIÓN Y METADATOS DE TESTING
+# =====================================
+.coverage
+htmlcov/
+.cache/
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Reportes de pytest-cov
+coverage.xml
+coverage.json
+
+# =====================================
+# ARCHIVOS DE NOTEBOOKS Y EXPORTACIONES
+# =====================================
+.ipynb_checkpoints/
+*.ipynb~
+
+# =====================================
+# HERRAMIENTAS Y ENTORNOS DE DESARROLLO
+# =====================================
+.vscode/
+.idea/
+.spyproject/
+.pytest_cache/
+.mypy_cache/
+ruff_cache/
+dmypy.json
+.pyre/
+pytestdebug.log
+
+# =====================================
+# REPORTES / SALIDAS AUTOMÁTICAS
+# =====================================
+*.out
+*.err
+*.log
+logs/
+reports/
+dist/
+build/
+*.egg-info/
+
+# =====================================
+# SISTEMAS OPERATIVOS
+# =====================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# =====================================
+# GITHUB / CI-CD (si no se usa)
+# =====================================
+# Si no quieres subir los workflows, descomenta:
+# .github/
+
+# =====================================
+# OTROS ARCHIVOS TEMPORALES DE EDICIÓN
+# =====================================
+*.tmp
+*.bak
+*.old
+*.orig
+*~
