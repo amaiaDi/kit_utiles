@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kit_utiles"
+version = "0.2.0"
+description = "Kit de utilidades para FP (IA/Big Data)"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+# Hace visible 'src' en los tests sin necesidad de instalar el paquete
+pythonpath = ["src"]
+addopts = "-q --maxfail=1 --disable-warnings --cov=src/kit_utiles --cov-report=term-missing"

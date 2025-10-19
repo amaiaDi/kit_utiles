@@ -1,213 +1,233 @@
-# 🧩 Proyecto: Kit Útiles
-Mini proyecto en **Python** diseñado para practicar las **pruebas unitarias** con `pytest` y las buenas prácticas de desarrollo.
-Forma parte de la unidad de trabajo sobre **introducción al testing** en entornos de programación.
+# 🧱 Proyecto `kit_utiles`
+### Repositorio de utilidades en Python con CI/CD, tests y cobertura automática
 
-# 🎯 Objetivo
-Aprender a:
-  * Crear un entorno de desarrollo aislado con venv.
-  * Aplicar el patrón AAA (Arrange, Act, Assert).
-  * Desarrollar con TDD (Red → Green → Refactor).
-  * Escribir tests con pytest.
-  * Probar funciones, excepciones, E/S y pequeños scripts CLI.
-  * Mantener un proyecto limpio con .gitignore.
+![CI](https://github.com/<USUARIO>/<REPO>/actions/workflows/ci.yml/badge.svg)
 
-## 📂 Estructura
+---
+
+## 📘 Descripción general
+
+`kit_utiles` es un paquete educativo desarrollado en el marco de la asignatura **Programación e Inteligencia Artificial / Entornos de Desarrollo**.  
+El objetivo es aplicar buenas prácticas de **desarrollo profesional en Python**, incorporando:
+
+- Estructura modular con `src/`
+- Tests automatizados (20 casos)
+- Cobertura de código con `pytest-cov`
+- Integración continua con **GitHub Actions**
+- Control de versiones con **Git y Git LFS**
+
+---
+
+## 🧩 Fases del proyecto
+
+| Fase | Contenido | Resultado principal |
+|------|------------|---------------------|
+| **Fase 1** | Creación del paquete `kit_utiles` con módulos `strings`, `numbers`, `files`, `cli`. | Código funcional en `src/kit_utiles/`. |
+| **Fase 2** | Implementación y ampliación de tests (E01–E20). | Carpeta `/tests` con 20 pruebas automatizadas. |
+| **Fase 3** | Configuración de **Git LFS** para ficheros grandes (`data/`, `models/`). | `.gitattributes` y LFS activo. |
+| **Fase 4** | Integración Continua (CI/CD) con **GitHub Actions**. | Pipeline que ejecuta tests y mide cobertura (mínimo 80%). |
+
+---
+
+## 🧱 Estructura del proyecto
+
+```
 kit_utiles/
-├── src/                      # Código fuente del proyecto
-│   ├── __init__.py
-│   ├── numbers.py
-│   ├── strings.py
-│   ├── files.py
-│   └── cli.py
-│
-├── tests/                    # Carpeta de tests (pytest)
-│   ├── test_e01_sum_list.py
-│   ├── test_e02_unique_sorted.py
-│   ├── test_e03_leap_year.py
-│   ├── test_e04_safe_divide.py
-│   ├── test_e05_word_count.py
-│   ├── test_e06_file_roundtrip.py
-│   ├── test_e07_mean.py
-│   ├── test_e08_cli_sum.py
-│   ├── test_e09_validate_email.py
-│   └── test_e10_grade.py
-│
-├── pytest.ini                # Configuración global de pytest
-├── requirements-dev.txt      # Dependencias de desarrollo
-├── venv_kitUtiles/           # Entorno virtual (NO subir a Git)
-├── .gitignore                # Archivos y carpetas a ignorar
-└── README.md                 # Este documento
+├─ src/
+│  └─ kit_utiles/
+│     ├─ __init__.py
+│     ├─ strings.py
+│     ├─ numbers.py
+│     ├─ files.py
+│     └─ cli.py
+├─ tests/
+│  ├─ conftest.py
+│  ├─ test_e01_...py
+│  ├─ ...
+│  └─ test_e20_grade_edges_more.py
+├─ .github/
+│  └─ workflows/
+│     └─ ci.yml
+├─ .coveragerc
+├─ pyproject.toml
+├─ requirements.txt
+├─ README.md
+└─ .gitattributes
+```
 
-## ⚙️ 1️⃣ Crear el entorno virtual
-🔹 Windows (PowerShell o CMD)
+---
+
+## ⚙️ Instalación local
+
 ```bash
-python -m venv venv_kitUtiles
+# 1️⃣ Clona el repositorio
+git clone https://github.com/<USUARIO>/<REPO>.git
+cd kit_utiles
+
+# 2️⃣ Crea y activa entorno virtual
+python -m venv .venv
+source .venv/bin/activate    # En Windows: .venv\Scripts\activate
+
+# 3️⃣ Instala dependencias
+pip install -r requirements.txt
+
+# 4️⃣ (Opcional) Instala el paquete en modo editable
+pip install -e .
 ```
 
-🔹 macOS / Linux
+---
+
+## 🧪 Ejecución de tests
+
+Ejecuta todos los tests:
+
 ```bash
-python3 -m venv venv_kitUtiles
+pytest
 ```
 
-## ⚙️ 2️⃣ Activar el entorno virtual
-🟣 En Windows (CMD)
+### Con cobertura de código
 ```bash
-venv_kitUtiles\Scripts\activate
+pytest --cov=src/kit_utiles --cov-report=term-missing
 ```
 
-🟢 En PowerShell
-  Si da error de permisos, ejecuta una vez:
-  Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
-  Luego:
-  ```bash
-  venv_kitUtiles\Scripts\Activate.ps1
-  ```
-
-🔵 En macOS / Linux
-  ```bash
-  source venv_kitUtiles/bin/activate
-  ```
-
-## ⚙️ 3️⃣ Desactivar el entorno
-
-Cuando termines:
-  ```bash
-  deactivate
-  ```
-## 🧠 4️⃣ Buenas prácticas
-  * Los tests deben cubrir todos los casos del código.
-  * Cada test se nombra con el prefijo test_ y una descripción clara.
-  * No uses print() en los tests.
-  * No edites los archivos del módulo src/, solo los tests.
-  * Ejecuta pytest -v antes de cada commit.
-
-
-## ⚙️ 5️⃣ Instalar dependencias
-Con el entorno activo:
-  ```bash
-  pip install --upgrade pip
-  pip install -r requirements-dev.txt
-  ```
-
-📦 Ejemplo de requirements-dev.txt:
-  ```bash
-  pytest>=8.0
-  pytest-cov
-  ```
-
-## 6️⃣ Cómo ejecutar los tests
-1. Instala dependencias:
-🔸 Todos los tests:
-  ```bash
-  pytest -v
-  ```
-
-🔸 Un test concreto:
-  ```bash
-  pytest tests/test_e04_safe_divide.py -v
-  ```
-
-🔸 Con cobertura:
-  ```bash
-  pytest --cov=src --cov-report=term-missing
-  ```
-
-## ⚙️ 6️⃣ Probar el CLI
-Ejecuta directamente desde el proyecto:
+### Generar informe HTML de cobertura
 ```bash
-python -m src.cli "1,2,3,4"
-```
-Debería mostrar:
-10.0
-
-## 7️⃣Ejecución
-
-![1760295025777](image/README/1760295025777.png)
-
-## 🧾 `.gitignore` recomendado
-
-# =====================================
-# ENTORNOS VIRTUALES
-# =====================================
-venv_kitUtiles/
-.venv/
-env/
-ENV/
-venv/
-
-# =====================================
-# PYTHON CACHE / COMPILADOS
-# =====================================
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-*.pdb
-*.pkl
-*.db
-*.sqlite3
-
-# =====================================
-# CONFIGURACIÓN Y METADATOS DE TESTING
-# =====================================
-.coverage
-htmlcov/
-.cache/
-*.log
-*.tmp
-*.bak
-*.swp
-coverage.xml
-coverage.json
-.pytest_cache/
-.mypy_cache/
-ruff_cache/
-pytestdebug.log
-
-# =====================================
-# ENTORNOS DE DESARROLLO E IDEs
-# =====================================
-.vscode/
-.idea/
-.spyproject/
-.pyre/
-
-# =====================================
-# REPORTES / BUILDS / DISTRIBUCIÓN
-# =====================================
-logs/
-reports/
-dist/
-build/
-*.egg-info/
-
-![1760293336021](image/README/1760293336021.png)
-
-## 8️⃣ ⚙️ `.github/workflows/tests.yml` (opcional, CI/CD)
-
-```yaml
-name: tests
-on: [push, pull_request]
-jobs:
-  pytest:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - run: pip install -r requirements-dev.txt
-      - run: pytest -v --cov=src --cov-report=term-missing
+coverage html
+start htmlcov/index.html   # Abre el informe en el navegador
 ```
 
+---
 
-## 9️⃣🧩 Autor / Contexto educativo
+## 🧰 Cobertura mínima exigida
 
-Proyecto de práctica didáctica —
-FP Euskadi · Curso de Especialización en Inteligencia Artificial y Big Data
-Asignatura: Programación de Inteligencia Artificial
-Tema: Pruebas unitarias con pytest
+El proyecto requiere una **cobertura ≥ 80%**.  
+El control se aplica automáticamente en **GitHub Actions** mediante:
 
-### 🧠 Resumen rápido de comandos
+```bash
+pytest --cov=src/kit_utiles --cov-fail-under=80
+```
 
-![1760292125824](image/README/1760292125824.png)
+Archivo `.coveragerc`:
+
+```ini
+[run]
+branch = True
+source = src/kit_utiles
+omit = tests/*
+```
+
+---
+
+## 🧩 CI/CD con GitHub Actions
+
+El flujo de integración continua está definido en:
+
+```
+.github/workflows/ci.yml
+```
+
+### 🚀 Qué hace automáticamente el pipeline:
+1. Instala Python 3.11  
+2. Instala dependencias (`pytest`, `pytest-cov`, `coverage`)  
+3. Ejecuta todos los tests (`pytest`)  
+4. Falla si la cobertura < 80%  
+5. Genera y sube los artefactos `coverage-html` y `coverage.xml`
+
+### ✅ Activación automática
+Solo tienes que subir (`git push`) el archivo `ci.yml`.  
+GitHub lo detecta sin configuración adicional.
+
+Accede a los resultados desde la pestaña **Actions** del repositorio.
+
+---
+
+## 🧠 Tests automáticos incluidos (E01–E20)
+
+| Grupo | Módulo | Ejemplos de funciones testeadas |
+|--------|---------|--------------------------------|
+| **Strings** | `strings.py` | `normalize_whitespace`, `is_palindrome`, `join_chars`, `snake_to_camel`, `word_count`, `validate_email` |
+| **Numbers** | `numbers.py` | `sum_list`, `unique_sorted`, `safe_divide`, `mean`, `grade`, `clamp` |
+| **Files** | `files.py` | `save_lines`, `load_lines`, `file_size`, `read_lines` |
+| **CLI** | `cli.py` | `main(argv)` con CSV vacío, con espacios y mixto |
+
+📋 Los tests están ubicados en `tests/` y cubren los **20 escenarios funcionales**, incluyendo casos límite y errores esperados.
+
+---
+
+## 📊 Resultados y cobertura
+
+Tras ejecutar los tests localmente o en GitHub Actions, puedes consultar:
+- Cobertura global en terminal  
+- Detalle de líneas no cubiertas en el informe HTML (`htmlcov/index.html`)  
+- Artefactos descargables desde Actions (`coverage-html`, `coverage.xml`)
+
+---
+
+## 🧩 Control de versiones y Git LFS
+
+Para activar **Git LFS** (Fase 3):
+
+```bash
+git lfs install
+git add .gitattributes
+git commit -m "Activa Git LFS para data/models"
+```
+
+Ejemplo de `.gitattributes`:
+
+```gitattributes
+data/** filter=lfs diff=lfs merge=lfs -text
+models/** filter=lfs diff=lfs merge=lfs -text
+*.csv filter=lfs diff=lfs merge=lfs -text
+```
+
+---
+
+## 🔄 Flujo completo del proyecto
+
+```text
+src/kit_utiles/ (código fuente)
+        ↓
+pytest + pytest-cov (tests)
+        ↓
+GitHub Actions (CI/CD)
+        ↓
+coverage.html + artifact XML
+        ↓
+Badge de estado en README.md
+```
+
+---
+
+## 🏷️ Badge de estado
+
+Añade al inicio del README:
+
+```markdown
+![CI](https://github.com/<USUARIO>/<REPO>/actions/workflows/ci.yml/badge.svg)
+```
+
+---
+
+## 📚 Créditos y autoría
+
+Proyecto desarrollado en el contexto docente del **Curso de Especialización en Inteligencia Artificial y Big Data (FP en Euskadi)**.  
+Aplicación práctica de herramientas de desarrollo profesional:
+
+- **Python 3.11**
+- **pytest / pytest-cov**
+- **GitHub Actions**
+- **Git LFS**
+- **Cobertura ≥ 80%**
+
+---
+
+## 🧭 Próximas fases sugeridas
+
+| Fase | Contenido | Herramienta |
+|-------|------------|-------------|
+| **5** | Despliegue del paquete con Docker y push a Docker Hub | Docker + GitHub Actions |
+| **6** | Publicación del paquete en PyPI (entorno formativo) | Twine / build |
+| **7** | Integración con MLflow o Hugging Face | MLOps |
+
+---
