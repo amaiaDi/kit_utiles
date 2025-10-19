@@ -204,7 +204,7 @@ Badge de estado en README.md
 Añade al inicio del README:
 
 ```markdown
-![CI](https://github.com/<USUARIO>/<REPO>/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/maiderIABD/kit_utiles/actions/workflows/ci.yml/badge.svg)
 ```
 
 ---
