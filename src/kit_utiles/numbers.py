@@ -14,7 +14,7 @@ def mean(values: Iterable[Number]) -> float:
     """Media aritmética; ValueError si secuencia vacía."""
     vals: List[Number] = list(values)
     if not vals:
-        raise ValueError("values cannot be empty")
+        raise ValueError("empty sequence")  # <— mensaje exacto que espera el test
     return float(sum(vals)) / len(vals)
 
 # ---------- Requeridos por E11, E12, E13, E16, E20 ----------
@@ -37,12 +37,13 @@ def unique_sorted(values: Iterable[str]) -> list[str]:
 def safe_divide(a: Number, b: Number) -> float:
     """
     Divide a/b validando tipos numéricos.
-    Lanza TypeError si a o b no son int/float.
+    - TypeError si a o b no son int/float
+    - ValueError("division by zero") si b == 0
     """
     if not isinstance(a, (int, float)) or not isinstance(b, (int, float)):
         raise TypeError("safe_divide requires numeric types (int/float)")
     if b == 0:
-        return float("inf")  # o podría ser raise/0; el test E13 valida tipos
+        raise ValueError("division by zero")
     return float(a) / float(b)
 
 def grade(value: int) -> str:
@@ -61,3 +62,14 @@ def grade(value: int) -> str:
     if value >= 70: return "C"
     if value >= 60: return "D"
     return "F"
+
+def is_leap_year(year: int) -> bool:
+    """
+    Devuelve True si 'year' es bisiesto según el calendario gregoriano:
+      - divisible por 4
+      - excepto los divisibles por 100, salvo que también lo sean por 400
+    Ej.: 2000 → True, 1900 → False, 2024 → True, 2023 → False
+    """
+    if not isinstance(year, int):
+        raise TypeError("is_leap_year requires an integer year")
+    return (year % 4 == 0) and (year % 100 != 0 or year % 400 == 0)

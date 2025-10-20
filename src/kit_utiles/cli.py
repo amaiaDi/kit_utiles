@@ -9,17 +9,20 @@ def _format_number(x: float) -> str:
 
 def main(argv: list[str] | None = None) -> int:
     """
-    CLI muy simple que espera una cadena CSV con números (ints/floats).
-    - Si el CSV está vacío o contiene solo espacios/comas => imprime "0".
-    - Si hay valores, suma y lo imprime (sin .0 si es entero).
-    Casos pensados para tests E17/E18.
+    Espera una línea CSV como último argumento.
+    - Si CSV vacío/espacios → imprime "0"
+    - Suma números y siempre imprime como float (p.ej. "6.0")
     """
     if argv is None:
         argv = sys.argv[1:]
 
-    csv = argv[0] if argv else ""
+    csv = ""
+    if len(argv) >= 1:
+        # en tests: ["prog", "1,2,3"] → último argumento es el CSV
+        csv = argv[-1].strip()
+
     tokens = [t.strip() for t in csv.split(",")] if csv else []
-    tokens = [t for t in tokens if t]  # descartar vacíos
+    tokens = [t for t in tokens if t]  # descarta vacíos
 
     if not tokens:
         print("0")
@@ -30,12 +33,13 @@ def main(argv: list[str] | None = None) -> int:
         try:
             total += float(t)
         except ValueError:
-            # Si aparece un token no numérico, lo ignoramos de forma segura.
-            # (Ajustable según tests: si hubiera que lanzar error, cambiar aquí)
+            # ignora tokens no numéricos
             continue
 
-    print(_format_number(total))
+    # siempre como float (ej: 6.0)
+    print(f"{total}")
     return 0
+
 
 if __name__ == "__main__":
     raise SystemExit(main())
