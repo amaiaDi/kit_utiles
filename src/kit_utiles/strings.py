@@ -41,16 +41,24 @@ def word_count(text: str) -> Dict[str, int]:
     """
     if not text:
         return {}
-    text = _strip_accents(text.lower())
-    text = _PUNCT_RE.sub(" ", text)
-    tokens = text.split()
+    # 1) bajar a minúsculas
+    t = text.lower()
+    # 2) eliminar acentos/diacríticos (qué→que, árbol→arbol, ñ→n)
+    t = _strip_accents(t)
+    # 3) quitar signos y separar por no alfanumérico
+    #    (¿?¡!.,;:… comillas, paréntesis, etc.)
+    t = re.sub(r"[^a-z0-9]+", " ", t)
+
+    t = _PUNCT_RE.sub(" ", t)
+    tokens = t.split()
     return dict(Counter(tokens))
 
 # Acepta subdominios y TLD 2–10 letras; usuario con ._%+-
-_EMAIL_RE = re.compile(
-    r"^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\.)+[A-Za-z]{2,10}$"
+_EMAIL_RE = re.compile( r'^[A-Za-z0-9._-]+@'     # usuario
+    r'(?:[A-Za-z0-9-]+\.)+'  # >=1 subdominio
+    r'[A-Za-z]{2,10}$'       # TLD 2..10)
 )
 
 def validate_email(email: str) -> bool:
-    """Valida emails con subdominios y TLD de 2 a 10 letras."""
+    """Valida emails con subdominios y TLD de 2 a 9 letras."""
     return bool(_EMAIL_RE.match(email or ""))
