@@ -1,5 +1,5 @@
 """Tests del ejercicio 1: sum_list"""
-from src.numbers import sum_list
+from kit_utiles.numbers import sum_list
 
 
 def test_sum_list_suma_correcta():

@@ -1,6 +1,6 @@
 """Tests del ejercicio 5: word_count (fixtures)"""
 import pytest
-from src.strings import word_count
+from kit_utiles.strings import word_count
 
 
 @pytest.fixture

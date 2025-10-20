@@ -1,6 +1,6 @@
 """Tests del ejercicio 6: save_lines / load_lines (tmp_path)"""
 from pathlib import Path
-from src.files import save_lines, load_lines
+from kit_utiles.files import save_lines, load_lines
 
 
 def test_roundtrip_tmp_path(tmp_path: Path):

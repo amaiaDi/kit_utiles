@@ -1,6 +1,6 @@
 """Tests del ejercicio 3: is_leap_year (parametrización)"""
 import pytest
-from src.numbers import is_leap_year
+from kit_utiles.numbers import is_leap_year
 
 
 @pytest.mark.parametrize(

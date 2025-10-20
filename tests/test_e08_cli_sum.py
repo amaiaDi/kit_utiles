@@ -1,5 +1,5 @@
 """Tests del ejercicio 8: CLI (captura de salida con capsys)"""
-from src.cli import main
+from kit_utiles.cli import main
 
 
 def test_main_suma_basica(capsys):

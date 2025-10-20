@@ -1,5 +1,5 @@
 # Puede fallar si la expresión regular no permite subdominios o TLD 2-10 letras.
-from src.strings import validate_email
+from kit_utiles.strings import validate_email
 
 def test_validate_email_subdominios_y_tld():
     ok = [

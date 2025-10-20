@@ -1,6 +1,6 @@
 """Tests del ejercicio 4: safe_divide (excepciones)"""
 import pytest
-from src.numbers import safe_divide
+from kit_utiles.numbers import safe_divide
 
 
 def test_safe_divide_ok():

@@ -1,6 +1,6 @@
 """Tests del ejercicio 10: grade (fronteras y errores)"""
 import pytest
-from src.numbers import grade
+from kit_utiles.numbers import grade
 
 
 @pytest.mark.parametrize(

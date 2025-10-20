@@ -1,6 +1,6 @@
 # Versión alternativa del test compartido con un comentario distinto para provocar conflicto.
 
-from src.cli import main
+from kit_utiles.cli import main
 
 def test_cli_csv_vacio_bis(capsys):
     main(["prog", "  ,  ,  "])

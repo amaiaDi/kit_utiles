@@ -1,6 +1,6 @@
 """Tests del ejercicio 7: mean (errores y cálculo)"""
 import pytest
-from src.numbers import mean
+from kit_utiles.numbers import mean
 
 
 def test_mean_ok():

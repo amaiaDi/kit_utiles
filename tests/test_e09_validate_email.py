@@ -1,6 +1,6 @@
 """Tests del ejercicio 9: validate_email (parametrización múltiple)"""
 import pytest
-from src.strings import validate_email
+from kit_utiles.strings import validate_email
 
 
 @pytest.mark.parametrize(

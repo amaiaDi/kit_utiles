@@ -1,7 +1,7 @@
 # Si load_lines no devuelve [], falla el caso de archivo vacío.
 # Si save_lines no crea carpetas, fallará el nested.
 from pathlib import Path
-from src.files import save_lines, load_lines
+from kit_utiles.files import save_lines, load_lines
 
 def test_load_lines_empty(tmp_path: Path):
     p = tmp_path / "vacio.txt"

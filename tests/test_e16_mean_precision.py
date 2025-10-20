@@ -2,7 +2,7 @@
 # Si hay error de precisión grueso, también se notará.
 import math
 import pytest
-from src.numbers import mean
+from kit_utiles.numbers import mean
 
 def test_mean_vacia_error():
     with pytest.raises(ValueError):

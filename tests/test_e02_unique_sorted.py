@@ -1,5 +1,5 @@
 """Tests del ejercicio 2: unique_sorted"""
-from src.numbers import unique_sorted
+from kit_utiles.numbers import unique_sorted
 
 
 def test_unique_sorted_enteros():

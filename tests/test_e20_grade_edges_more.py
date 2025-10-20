@@ -1,6 +1,6 @@
 # Cubre bordes adicionales. Fallará si grade acepta float o no valida rango.
 import pytest
-from src.numbers import grade
+from kit_utiles.numbers import grade
 
 @pytest.mark.parametrize("val,letter", [(100,"A"), (90,"A"), (89,"B"), (80,"B"), (79,"C"), (70,"C"), (69,"D"), (60,"D"), (59,"F"), (0,"F")])
 def test_grade_bordes(val, letter):
