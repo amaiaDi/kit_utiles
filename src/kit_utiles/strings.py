@@ -58,7 +58,24 @@ _EMAIL_RE = re.compile( r'^[A-Za-z0-9._-]+@'     # usuario
     r'(?:[A-Za-z0-9-]+\.)+'  # >=1 subdominio
     r'[A-Za-z]{2,10}$'       # TLD 2..10)
 )
+# Coincide todo el email y captura el TLD en el último grupo
+_EMAIL_FULL = re.compile(
+    r"^[A-Za-z0-9._%+-]+@"          # usuario
+    r"(?:[A-Za-z0-9-]+\.)+"         # uno o más subdominios + punto
+    r"([A-Za-z]+)$"                 # <-- capturamos el TLD (solo letras)
+)
+
 
 def validate_email(email: str) -> bool:
-    """Valida emails con subdominios y TLD de 2 a 9 letras."""
-    return bool(_EMAIL_RE.match(email or ""))
+    """
+    Valida emails con subdominios y TLD alfabético de longitud 2..10.
+    - Rechaza '@@', dominios vacíos, dobles puntos, etc. por el fullmatch.
+    - Rechaza TLD de 1 o >10 letras explícitamente.
+    """
+    if not email:
+        return False
+    m = _EMAIL_FULL.fullmatch(email)
+    if not m:
+        return False
+    tld = m.group(1)
+    return 2 <= len(tld) <= 10

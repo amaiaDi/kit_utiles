@@ -70,6 +70,7 @@ def is_leap_year(year: int) -> bool:
       - excepto los divisibles por 100, salvo que también lo sean por 400
     Ej.: 2000 → True, 1900 → False, 2024 → True, 2023 → False
     """
-    if not isinstance(year, int):
+    # Rechaza bool explícitamente y cualquier no-int
+    if isinstance(year, bool) or not isinstance(year, int):
         raise TypeError("is_leap_year requires an integer year")
     return (year % 4 == 0) and (year % 100 != 0 or year % 400 == 0)
